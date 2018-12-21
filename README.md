@@ -49,7 +49,7 @@ upload.save
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bithex.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sharshenov/bithex.
 
 ## License
 
