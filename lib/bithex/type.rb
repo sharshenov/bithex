@@ -10,17 +10,25 @@ module Bithex
       validate_subtype
     end
 
+    def type
+      :bithex
+    end
+
     def deserialize(value)
       return if value.blank?
 
       format("%0#{hex_value_length}x", value.to_i(2))
     end
 
+    alias type_cast_from_database deserialize
+
     def serialize(value)
       return if value.blank?
 
-      [value.to_s].pack('H*').unpack1('B*')
+      [value.to_s].pack('H*').unpack('B*')[0]
     end
+
+    alias type_cast_for_database serialize
 
     def assert_valid_value(value)
       return if value.blank?
@@ -43,7 +51,7 @@ module Bithex
     end
 
     def validate_format(value)
-      return if value.match?(/\h+/)
+      return if value =~ /\h+/
 
       raise ArgumentError,
             "Expected '#{value}' to be a hex string"
